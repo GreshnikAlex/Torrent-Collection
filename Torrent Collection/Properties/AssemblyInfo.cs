@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("Torrent Collection")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Uk. Soft-Evolution")]
 [assembly: AssemblyProduct("Torrent Collection")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCopyright("Copyright © Uk. Soft-Evolution 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
