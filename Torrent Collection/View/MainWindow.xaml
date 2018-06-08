@@ -3,8 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodel="clr-namespace:Torrent_Collection.ViewModel"
         mc:Ignorable="d"
         Title="Torrent Collectoin" Height="490" Width="890" Background="#FF2D2D30" Foreground="{StaticResource Text}" WindowStartupLocation="CenterScreen" WindowState="Maximized" MinWidth="890" MinHeight="490">
+    <Window.DataContext>
+        <viewmodel:MainViewModel />
+    </Window.DataContext>
     <Grid>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="350">
 
@@ -31,7 +35,7 @@
             <Grid Grid.Row="2" Margin="0,1.5,0,0">
                 <StackPanel>
                     <Button Style="{StaticResource ButtonStyle}" Content="Войти"/>
-                    <Button Style="{StaticResource ButtonStyle}" Content="Регистрация"/>
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding Reg_Click}" Content="Регистрация"/>
                 </StackPanel>
             </Grid>
         </Grid>

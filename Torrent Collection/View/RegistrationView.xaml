@@ -3,15 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Torrent_Collection.View"
         mc:Ignorable="d"
-        Title="RegistrationView" Height="310" Width="300" Background="#FF2D2D30" Foreground="{StaticResource Text}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" BorderBrush="#FF007ACC" WindowStyle="None" BorderThickness="2">
+        Title="RegistrationView" Height="310" Width="400" Background="#FF2D2D30" Foreground="{StaticResource Text}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" BorderBrush="#FF007ACC" WindowStyle="None" BorderThickness="2">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -52,7 +50,7 @@
                     <TextBox Style="{StaticResource TextBoxStyle}"/>
                 </Grid>
                 <Button Style="{StaticResource ButtonStyle}" Content="Регистрация"/>
-                <Button Style="{StaticResource ButtonStyle}" Content="Отмена"/>
+                <Button Style="{StaticResource ButtonStyle}" Command="{Binding Cancel_Click}" Content="Отмена"/>
             </StackPanel>
         </Grid>
     </Grid>
