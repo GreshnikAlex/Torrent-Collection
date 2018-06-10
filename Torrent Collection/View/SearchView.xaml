@@ -35,7 +35,26 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="1" Margin="5,2.5,0,0" Background="#FF1C1D20">
-            
+            <ListBox Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Image/>
+                            </Grid>
+                            <Grid Grid.Column="1" Margin="3,0,0,0">
+                                <StackPanel>
+                                    
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
     </Grid>
 </Page>
