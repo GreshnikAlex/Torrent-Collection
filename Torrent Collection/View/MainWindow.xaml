@@ -5,39 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodel="clr-namespace:Torrent_Collection.ViewModel"
         mc:Ignorable="d"
-        Title="Torrent Collectoin" Height="490" Width="890" Background="#FF2D2D30" Foreground="{StaticResource Text}" WindowStartupLocation="CenterScreen" WindowState="Maximized" MinWidth="890" MinHeight="490">
-    <Window.DataContext>
-        <viewmodel:MainViewModel />
-    </Window.DataContext>
+        Title="Torrent Collectoin" Height="490" Width="890" Background="#FF2D2D30" WindowStartupLocation="CenterScreen" WindowState="Maximized" MinWidth="890" MinHeight="490">
     <Grid>
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="350">
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid>
-                <TextBlock Text="Torrent Collection" FontSize="30" FontFamily="Comic Sans MS" TextAlignment="Center"/>
-            </Grid>
-            <Grid Grid.Row="1">
-                <StackPanel Margin="0,3,0,1.5">
-                    <Grid Margin="0,0,0,1.5">
-                        <TextBlock Style="{StaticResource HintStyle}" Text="Логин"/>
-                        <TextBox Style="{DynamicResource TextBoxStyle}" />
-                    </Grid>
-                    <Grid Margin="0,1.5,0,0">
-                        <TextBlock Style="{StaticResource HintStyle}"  Text="Пароль"/>
-                        <TextBox Style="{DynamicResource TextBoxStyle}" />
-                    </Grid>
-                </StackPanel>
-            </Grid>
-            <Grid Grid.Row="2" Margin="0,1.5,0,0">
-                <StackPanel>
-                    <Button Style="{StaticResource ButtonStyle}" Content="Войти"/>
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding Reg_Click}" Content="Регистрация"/>
-                </StackPanel>
-            </Grid>
-        </Grid>
+        <Frame NavigationUIVisibility="Hidden" Content="{Binding SelectedPage}"/>
     </Grid>
 </Window>

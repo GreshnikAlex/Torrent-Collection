@@ -7,6 +7,10 @@ namespace Torrent_Collection
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow() => InitializeComponent();
+        public MainWindow()
+        {
+            InitializeComponent();
+            DataContext = new ViewModel.MainViewModel();
+        }
     }
 }

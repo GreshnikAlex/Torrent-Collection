@@ -1,0 +1,44 @@
+﻿<Page x:Class="Torrent_Collection.View.LoginView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d" 
+      d:DesignHeight="490" d:DesignWidth="890"
+      Title="Страница входа" Foreground="{StaticResource Text}">
+    <Grid>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="400">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid>
+                <TextBlock Text="Torrent Collection" FontSize="30" FontFamily="Comic Sans MS" TextAlignment="Center"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <StackPanel Margin="0,3,0,1.5">
+                    <Grid Margin="0,0,0,1.5">
+                        <TextBlock Style="{StaticResource HintStyle}" Text="Логин"/>
+                        <TextBox Style="{DynamicResource TextBoxStyle}" />
+                    </Grid>
+                    <Grid Margin="0,1.5,0,0">
+                        <TextBlock Style="{StaticResource HintStyle}"  Text="Пароль"/>
+                        <TextBox Style="{DynamicResource TextBoxStyle}" />
+                    </Grid>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="2" Margin="0,1.5,0,0">
+                <StackPanel>
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding Enter_Click}" Content="Войти"/>
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding Reg_Click}" Content="Регистрация"/>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="3">
+                <TextBlock Text="Логин или Пароль не верен" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFE62B1A" FontFamily="Comic Sans MS" Opacity="{Binding OpacityLoginError}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

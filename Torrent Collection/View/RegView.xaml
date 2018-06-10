@@ -1,0 +1,60 @@
+﻿<Page x:Class="Torrent_Collection.View.RegView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d" 
+      d:DesignHeight="490" d:DesignWidth="890"
+      Title="Страница регистрации" Foreground="{StaticResource Text}">
+    <Grid>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="400">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Image/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <StackPanel>
+                        <Grid Margin="1.5">
+                            <TextBlock Style="{StaticResource HintStyle}" Text="Логин"/>
+                            <TextBox Style="{StaticResource TextBoxStyle}"/>
+                        </Grid>
+                        <Grid Margin="1.5">
+                            <TextBlock Style="{StaticResource HintStyle}" Text="Пароль"/>
+                            <TextBox Style="{StaticResource TextBoxStyle}"/>
+                        </Grid>
+                        <Grid Margin="1.5">
+                            <TextBlock Style="{StaticResource HintStyle}" Text="E-mail"/>
+                            <TextBox Style="{StaticResource TextBoxStyle}"/>
+                        </Grid>
+                        <Grid Margin="1.5">
+                            <TextBlock Style="{StaticResource HintStyle}" Text="Имя"/>
+                            <TextBox Style="{StaticResource TextBoxStyle}"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1">
+                <StackPanel>
+                    <Grid Margin="1.5">
+                        <TextBlock Style="{StaticResource HintStyle}" Text="Отчество"/>
+                        <TextBox Style="{StaticResource TextBoxStyle}"/>
+                    </Grid>
+                    <Grid Margin="1.5">
+                        <TextBlock Style="{StaticResource HintStyle}" Text="Фамилия"/>
+                        <TextBox Style="{StaticResource TextBoxStyle}"/>
+                    </Grid>
+                    <Button Style="{StaticResource ButtonStyle}" Content="Регистрация"/>
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding Back_Click}" Content="Назад"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
