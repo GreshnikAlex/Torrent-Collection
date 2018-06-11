@@ -3,10 +3,13 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:viewmodel="clr-namespace:Torrent_Collection.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="Окно поиска" Foreground="{StaticResource Text}">
-
+    <Page.DataContext>
+        <viewmodel:SearchViewModel/>
+    </Page.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -24,10 +27,10 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
                     <TextBlock Style="{StaticResource HintStyle}" Text="Найти"/>
-                    <TextBox Style="{StaticResource TextBoxStyle}" BorderThickness="0,0,0,2"/>
+                    <TextBox x:Name="SearchText" Style="{StaticResource TextBoxStyle}" BorderThickness="0,0,0,2"/>
                 </Grid>
                 <Grid Grid.Column="1">
-                    <Button Style="{StaticResource ButtonStyle}" Margin="0" Height="36" Content="Поиск" />
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding Search_Click}" CommandParameter="{Binding ElementName=SearchText, Path=Text}" Margin="0" Height="36" Content="Поиск" />
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">
@@ -35,20 +38,22 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="1" Margin="5,2.5,0,0" Background="#FF1C1D20">
-            <ListBox Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}">
+            <ListBox Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedTorrent}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0">
-                                <Image/>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <TextBlock Text="{Binding Path=Name}" Foreground="White" FontFamily="Comic Sans MS" FontSize="20"/>
                             </Grid>
-                            <Grid Grid.Column="1" Margin="3,0,0,0">
-                                <StackPanel>
-                                    
+                            <Grid Grid.Row="1">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Path=Size, StringFormat=Размер: {0} |}" Foreground="White" FontFamily="Comic Sans MS" FontSize="18"/>
+                                    <TextBlock Text="{Binding Path=Distribute, StringFormat=Сидов: {0} |}" Foreground="Green" Margin="3,0,0,0" FontFamily="Comic Sans MS" FontSize="18"/>
+                                    <TextBlock Text="{Binding Path=Download, StringFormat=Пиров: {0} |}" Foreground="Red" Margin="3,0,0,0" FontFamily="Comic Sans MS" FontSize="18"/>
                                 </StackPanel>
                             </Grid>
                         </Grid>

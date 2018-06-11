@@ -59,6 +59,7 @@
     </ApplicationDefinition>
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\SearchViewModel.cs" />
     <Compile Include="View\GlobalView.xaml.cs">
       <DependentUpon>GlobalView.xaml</DependentUpon>
     </Compile>
@@ -144,6 +145,12 @@
   </ItemGroup>
   <ItemGroup>
     <SplashScreen Include="SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Torrents\Torrents.csproj">
+      <Project>{439ae440-4180-4d31-8863-6787f6906669}</Project>
+      <Name>Torrents</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

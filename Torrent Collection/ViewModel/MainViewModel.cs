@@ -81,9 +81,9 @@ namespace Torrent_Collection.ViewModel
 
         public RelayCommand Enter_Click => new RelayCommand(obj =>
         {
-            OpacityLoginError = 1;
-            /*SearchPage = new View.SearchView();
-            SelectedPage = new View.GlobalView(this);*/
+            //OpacityLoginError = 1;
+            SearchPage = new View.SearchView();
+            SelectedPage = new View.GlobalView(this);
         });
         /// <summary>
         /// Метод команды для клика на кнопку "Регистрация"
@@ -100,6 +100,7 @@ namespace Torrent_Collection.ViewModel
         public RelayCommand Search_Click => new RelayCommand(obj =>
         {
             SelectedGlobalPage = SearchPage;
+
         });
         public RelayCommand Exit_Click => new RelayCommand(obj => 
         {
