@@ -46,6 +46,8 @@ namespace Torrents.WebSites
                 if (list[i].Contains("/details.php?id="))
                 {
                     var torrent = new TorrentModel();
+                    string[] url = list[i].Split(new char[] { '"', '/' });
+                    torrent.UrlTorrent = $"http://kinozal.tv/{url[2]}";
                     torrent.Name = list[++i];
                     i += 8;
                     torrent.Size = list[i];

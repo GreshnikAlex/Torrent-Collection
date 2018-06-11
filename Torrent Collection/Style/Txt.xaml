@@ -13,7 +13,7 @@
         <Setter Property="AllowDrop" Value="true"/>
         <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-        <Setter Property="Opacity" Value="0.8"/>
+        <Setter Property="Opacity" Value="1"/>
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -30,6 +30,11 @@
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="true">
                             <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                        </Trigger>
+                        <Trigger Property="Text" Value="">
+                            <Setter
+                                Property="Opacity"
+                                Value="0.8"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
