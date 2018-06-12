@@ -26,7 +26,7 @@
                     <ColumnDefinition Width="125"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <TextBlock Style="{StaticResource HintStyle}" Text="Найти"/>
+                    <TextBlock Style="{StaticResource HintStyle}" Text="Что мне найти?"/>
                     <TextBox x:Name="SearchText" Style="{StaticResource TextBoxStyle}" BorderThickness="0,0,0,2"/>
                 </Grid>
                 <Grid Grid.Column="1">
@@ -38,24 +38,44 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
-            <StackPanel DataContext="{Binding List}">
-                <Grid Background="#FF1C1D20" Margin="5,2.5,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid>
-                        <TextBlock Text="{Binding Path=Name}" Foreground="White" FontFamily="Comic Sans MS" FontSize="20"/>
-                    </Grid>
-                    <Grid Grid.Row="1">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Path=Size, StringFormat=Размер: {0} |}" Foreground="White" FontFamily="Comic Sans MS" FontSize="18"/>
-                            <TextBlock Text="{Binding Path=Distribute, StringFormat=Сидов: {0} |}" Foreground="Green" Margin="3,0,0,0" FontFamily="Comic Sans MS" FontSize="18"/>
-                            <TextBlock Text="{Binding Path=Download, StringFormat=Пиров: {0} |}" Foreground="Red" Margin="3,0,0,0" FontFamily="Comic Sans MS" FontSize="18"/>
-                        </StackPanel>
-                    </Grid>
-                </Grid>
-            </StackPanel>
+            <ScrollViewer>
+                <ItemsControl ItemsSource="{Binding List}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Background="#FF1C1D20" Margin="5,2.5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="810*"/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid>
+                                        <TextBlock Text="{Binding Path=Name}" Margin="3,0,0,0" Foreground="White" FontFamily="Comic Sans MS" FontSize="20"/>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                        <StackPanel Margin="3,0,0,0" Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Path=Size, StringFormat=Размер: {0} |}" Foreground="White" FontFamily="Comic Sans MS" FontSize="18"/>
+                                            <TextBlock Text="{Binding Path=Distribute, StringFormat=Сидов: {0} |}" Foreground="Green" Margin="3,0,0,0" FontFamily="Comic Sans MS" FontSize="18"/>
+                                            <TextBlock Text="{Binding Path=Download, StringFormat=Пиров: {0} |}" Foreground="Red" Margin="3,0,0,0" FontFamily="Comic Sans MS" FontSize="18"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <Button Style="{StaticResource ButtonStyle}" Height="30" Content="->" Margin="0,0,3,0"/>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
         </Grid>
         <!--<Grid Grid.Row="1" Margin="5,2.5,0,0" Background="#FF1C1D20">
             <ListBox Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedTorrent}">
