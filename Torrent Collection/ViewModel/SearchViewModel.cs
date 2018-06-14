@@ -51,11 +51,11 @@ namespace Torrent_Collection.ViewModel
             );
         });
 
-        public RelayCommand Download_Click => new RelayCommand(obj =>
+        /*public RelayCommand Download_Click => new RelayCommand(obj =>
         {
             TorrentModel torrentModel = obj as TorrentModel;
             MessageBox.Show(torrentModel.UrlTorrent);
-        });
+        });*/
 
         //INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

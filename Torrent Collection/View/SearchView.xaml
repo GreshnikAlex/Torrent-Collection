@@ -73,11 +73,11 @@
                                 <Grid Grid.Column="1">
                                     <Button
                                         Style="{StaticResource ButtonStyle}"
-                                        Command="{Binding DataContext.Download_Click, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
-                                        CommandParameter="{Binding}"
                                         Height="52"
                                         Content="↓"
                                         Margin="0,0,3,0"/>
+                                    <!--"{Binding DataContext.Download_Click, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                        CommandParameter="{Binding}"-->
                                 </Grid>
                                 <Grid Grid.Column="2">
                                     <Button Style="{StaticResource ButtonStyle}" Height="52" Content="!" Margin="0,0,3,0"/>
