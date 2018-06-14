@@ -16,7 +16,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid>
-                <TextBlock Text="Torrent Collection" FontSize="30" FontFamily="Comic Sans MS" TextAlignment="Center"/>
+                <TextBlock Text="Torrent Collection" FontSize="30" FontFamily="Consolas" TextAlignment="Center"/>
             </Grid>
             <Grid Grid.Row="1">
                 <StackPanel Margin="0,3,0,1.5">

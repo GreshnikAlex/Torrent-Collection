@@ -41,9 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LogicWeb.cs" />
+    <Compile Include="LogicQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TorrentModel.cs" />
-    <Compile Include="WebSites\Kinozal.cs" />
+    <Compile Include="WebSites\Rutor.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

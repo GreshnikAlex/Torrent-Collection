@@ -1,20 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using Torrents.WebSites;
 
 namespace Torrents
 {
     public class LogicWeb
     {
-        private Kinozal kinozal;
+        private Rutor rutor;
 
         public LogicWeb()
         {
-            kinozal = new Kinozal();
+            rutor = new Rutor();
         }
 
-        public List<TorrentModel> Search(string Query)
+        public ObservableCollection<TorrentModel> Search(string Query)
         {
-            return kinozal.Search(Query);
+            return rutor.Search(Query);
         }
     }
 }

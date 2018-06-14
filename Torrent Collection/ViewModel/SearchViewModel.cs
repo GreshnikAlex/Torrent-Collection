@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows;
 using Torrents;
 
 namespace Torrent_Collection.ViewModel
@@ -9,9 +11,8 @@ namespace Torrent_Collection.ViewModel
     public class SearchViewModel : INotifyPropertyChanged
     {
         private LogicWeb logicWeb;
-        private TorrentModel selectedTorrent;
-        private List<TorrentModel> list;
         private bool indeterminate;
+        private ObservableCollection<TorrentModel> torrentCollection;
 
         public SearchViewModel()
         {
@@ -19,23 +20,13 @@ namespace Torrent_Collection.ViewModel
             logicWeb = new LogicWeb();
         }
 
-        public TorrentModel SelectedTorrent
+        public ObservableCollection<TorrentModel> TorrentCollection
         {
-            get => selectedTorrent;
+            get => torrentCollection;
             set
             {
-                selectedTorrent = value;
-                OnPropertyChanged("selectedTorrent");
-            }
-        }
-
-        public List<TorrentModel> List
-        {
-            get => list;
-            set
-            {
-                list = value;
-                OnPropertyChanged("list");
+                torrentCollection = value;
+                OnPropertyChanged(nameof(torrentCollection));
             }
         }
 
@@ -45,7 +36,7 @@ namespace Torrent_Collection.ViewModel
             set
             {
                 indeterminate = value;
-                OnPropertyChanged("identerminate");
+                OnPropertyChanged(nameof(indeterminate));
             }
         }
 
@@ -54,10 +45,16 @@ namespace Torrent_Collection.ViewModel
             Task.Factory.StartNew(() =>
             {
                 Indeterminate = true;
-                List = logicWeb.Search(obj as string);
+                TorrentCollection = logicWeb.Search(obj as string);
                 Indeterminate = false;
             }
             );
+        });
+
+        public RelayCommand Download_Click => new RelayCommand(obj =>
+        {
+            TorrentModel torrentModel = obj as TorrentModel;
+            MessageBox.Show(torrentModel.UrlTorrent);
         });
 
         //INotifyPropertyChanged

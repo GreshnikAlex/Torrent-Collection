@@ -34,12 +34,12 @@
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">
-                <ProgressBar Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF007ACC" BorderThickness="0" IsIndeterminate="{Binding Indeterminate, UpdateSourceTrigger=PropertyChanged}"/>
+                <ProgressBar Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF007ACC" BorderThickness="0" IsIndeterminate="{Binding Indeterminate}"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
             <ScrollViewer>
-                <ItemsControl ItemsSource="{Binding List}">
+                <ItemsControl ItemsSource="{Binding TorrentCollection}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel/>
@@ -51,6 +51,8 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="810*"/>
                                     <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="50"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid Grid.Column="0">
                                     <Grid.RowDefinitions>
@@ -58,18 +60,30 @@
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <Grid>
-                                        <TextBlock Text="{Binding Path=Name}" Margin="3,0,0,0" Foreground="White" FontFamily="Comic Sans MS" FontSize="20"/>
+                                        <TextBlock Text="{Binding Path=Name}" Margin="3,0,0,0" Foreground="White" FontFamily="Consolas" FontSize="20"/>
                                     </Grid>
                                     <Grid Grid.Row="1">
                                         <StackPanel Margin="3,0,0,0" Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Path=Size, StringFormat=Размер: {0} |}" Foreground="White" FontFamily="Comic Sans MS" FontSize="18"/>
-                                            <TextBlock Text="{Binding Path=Distribute, StringFormat=Сидов: {0} |}" Foreground="Green" Margin="3,0,0,0" FontFamily="Comic Sans MS" FontSize="18"/>
-                                            <TextBlock Text="{Binding Path=Download, StringFormat=Пиров: {0} |}" Foreground="Red" Margin="3,0,0,0" FontFamily="Comic Sans MS" FontSize="18"/>
+                                            <TextBlock Text="{Binding Path=Size, StringFormat=Размер: {0} |}" Foreground="White" FontFamily="Consolas" FontSize="18"/>
+                                            <TextBlock Text="{Binding Path=Distribute, StringFormat=Сидов: {0} |}" Foreground="Green" Margin="3,0,0,0" FontFamily="Consolas" FontSize="18"/>
+                                            <TextBlock Text="{Binding Path=Download, StringFormat=Пиров: {0} |}" Foreground="Red" Margin="3,0,0,0" FontFamily="Consolas" FontSize="18"/>
                                         </StackPanel>
                                     </Grid>
                                 </Grid>
                                 <Grid Grid.Column="1">
-                                    <Button Style="{StaticResource ButtonStyle}" Height="30" Content="->" Margin="0,0,3,0"/>
+                                    <Button
+                                        Style="{StaticResource ButtonStyle}"
+                                        Command="{Binding DataContext.Download_Click, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
+                                        CommandParameter="{Binding}"
+                                        Height="52"
+                                        Content="↓"
+                                        Margin="0,0,3,0"/>
+                                </Grid>
+                                <Grid Grid.Column="2">
+                                    <Button Style="{StaticResource ButtonStyle}" Height="52" Content="!" Margin="0,0,3,0"/>
+                                </Grid>
+                                <Grid Grid.Column="3">
+                                    <Button Style="{StaticResource ButtonStyle}" Height="52" Content="→" Margin="0,0,3,0"/>
                                 </Grid>
                             </Grid>
                         </DataTemplate>
@@ -77,29 +91,5 @@
                 </ItemsControl>
             </ScrollViewer>
         </Grid>
-        <!--<Grid Grid.Row="1" Margin="5,2.5,0,0" Background="#FF1C1D20">
-            <ListBox Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedTorrent}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid>
-                                <TextBlock Text="{Binding Path=Name}" Foreground="White" FontFamily="Comic Sans MS" FontSize="20"/>
-                            </Grid>
-                            <Grid Grid.Row="1">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Path=Size, StringFormat=Размер: {0} |}" Foreground="White" FontFamily="Comic Sans MS" FontSize="18"/>
-                                    <TextBlock Text="{Binding Path=Distribute, StringFormat=Сидов: {0} |}" Foreground="Green" Margin="3,0,0,0" FontFamily="Comic Sans MS" FontSize="18"/>
-                                    <TextBlock Text="{Binding Path=Download, StringFormat=Пиров: {0} |}" Foreground="Red" Margin="3,0,0,0" FontFamily="Comic Sans MS" FontSize="18"/>
-                                </StackPanel>
-                            </Grid>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Grid>-->
     </Grid>
 </Page>
