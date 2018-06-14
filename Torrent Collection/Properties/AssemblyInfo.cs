@@ -8,7 +8,7 @@ using System.Windows;
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
 [assembly: AssemblyTitle("Torrent Collection")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Приложение для поиска и скачивания торрент контента")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Uk. Soft-Evolution")]
 [assembly: AssemblyProduct("Torrent Collection")]
