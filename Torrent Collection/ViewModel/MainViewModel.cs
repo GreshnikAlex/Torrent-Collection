@@ -4,6 +4,9 @@ using System.Windows.Controls;
 
 namespace Torrent_Collection.ViewModel
 {
+    /// <summary>
+    /// Класс главной модели представления
+    /// </summary>
     public class MainViewModel : INotifyPropertyChanged
     {
         Page loginPage;
@@ -15,6 +18,9 @@ namespace Torrent_Collection.ViewModel
 
         private int opacityLoginError;
 
+        /// <summary>
+        /// Конструктор главной модели придставления
+        /// </summary>
         public MainViewModel()
         {
             LoginPage = new View.LoginView(this);
@@ -23,6 +29,9 @@ namespace Torrent_Collection.ViewModel
             SelectedPage = LoginPage;
         }
 
+        /// <summary>
+        /// Метод для перехода на страницу входа
+        /// </summary>
         public Page LoginPage
         {
             get => loginPage;
@@ -32,6 +41,9 @@ namespace Torrent_Collection.ViewModel
                 OnPropertyChanged("loginPage");
             }
         }
+        /// <summary>
+        /// Метод для перехода на страницу регистрации
+        /// </summary>
         public Page RegPage
         {
             get => regPage;
@@ -41,6 +53,9 @@ namespace Torrent_Collection.ViewModel
                 OnPropertyChanged("regPage");
             }
         }
+        /// <summary>
+        /// Метод для работы с выбранной страницей
+        /// </summary>
         public Page SelectedPage
         {
             get => selectedPage;
@@ -51,6 +66,9 @@ namespace Torrent_Collection.ViewModel
             }
         }
 
+        /// <summary>
+        /// Метод для перехода на страницу поиска
+        /// </summary>
         public Page SearchPage
         {
             get => searchPage;
@@ -60,6 +78,9 @@ namespace Torrent_Collection.ViewModel
                 OnPropertyChanged("searchPage");
             }
         }
+        /// <summary>
+        /// Метод для работы с выбраной страницей в аккаунте пользователя
+        /// </summary>
         public Page SelectedGlobalPage
         {
             get => selectedGlobalPage;
@@ -69,6 +90,9 @@ namespace Torrent_Collection.ViewModel
                 OnPropertyChanged("selectedGlobalPage");
             }
         }
+        /// <summary>
+        /// Метод для отображения ошибки о не правильно вводе данных
+        /// </summary>
         public int OpacityLoginError
         {
             get => opacityLoginError;
@@ -79,6 +103,9 @@ namespace Torrent_Collection.ViewModel
             }
         }
 
+        /// <summary>
+        /// Комманда для кнопки "Вход"
+        /// </summary>
         public RelayCommand Enter_Click => new RelayCommand(obj =>
         {
             //OpacityLoginError = 1;
@@ -92,16 +119,25 @@ namespace Torrent_Collection.ViewModel
         {
             SelectedPage = RegPage;
         });
+        /// <summary>
+        /// Команда для кнопки "Назад"
+        /// </summary>
         public RelayCommand Back_Click => new RelayCommand(obj =>
         {
             SelectedPage = LoginPage;
         });
 
+        /// <summary>
+        /// Команда для кнопки "Поиск"
+        /// </summary>
         public RelayCommand Search_Click => new RelayCommand(obj =>
         {
             SelectedGlobalPage = SearchPage;
 
         });
+        /// <summary>
+        /// Команда для кнопки "Выход"
+        /// </summary>
         public RelayCommand Exit_Click => new RelayCommand(obj => 
         {
             SelectedPage = LoginPage;

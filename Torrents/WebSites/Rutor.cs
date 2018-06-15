@@ -3,8 +3,16 @@ using System.Collections.ObjectModel;
 
 namespace Torrents.WebSites
 {
+    /// <summary>
+    /// Класс для работы с сайтом rutor.info
+    /// </summary>
     public class Rutor : LogicQuery
     {
+        /// <summary>
+        /// Функция для реализации работы поиска по сайту
+        /// </summary>
+        /// <param name="Query">Строка критерия поиска</param>
+        /// <returns>Колекция найденых торрентов</returns>
         public ObservableCollection<TorrentModel> Search(string Query)
         {
             ObservableCollection<TorrentModel> Torrents = new ObservableCollection<TorrentModel>();

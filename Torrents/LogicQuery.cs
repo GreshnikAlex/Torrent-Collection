@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Torrents
 {
+    /// <summary>
+    /// Класс логики запросов к торрент сайтам
+    /// </summary>
     public class LogicQuery
     {
         HttpWebRequest webRequest = null;
@@ -12,8 +15,8 @@ namespace Torrents
         /// <summary>
         /// Метод для POST запросов на сайт
         /// </summary>
-        /// <param name="url">Адрес: https://{Адрес сайта}/{страница}.php</param>
-        /// <param name="param">Параметры: {параметр1}={значение1}&{параметр2}={значение2}</param>
+        /// <param name="url">Адрес</param>
+        /// <param name="param">Параметры</param>
         /// <returns>Возвращает страницу в виде HTML</returns>
         public string POST_Query(string url, string param)
         {
@@ -40,7 +43,7 @@ namespace Torrents
         /// <summary>
         /// Метод для GET запросов на сайт
         /// </summary>
-        /// <param name="url">Адрес с параметрами: https://{Адрес сайта}/{страница}.php?{параметр1}={значение1}&{параметр2}={значение2}</param>
+        /// <param name="url">Адрес с параметрами</param>
         /// <returns>Возвращает страницу в виде HTML</returns>
         public string GET_Query(string url)
         {

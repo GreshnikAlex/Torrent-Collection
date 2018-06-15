@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace Torrents
 {
+    /// <summary>
+    /// Класс торрент модели
+    /// </summary>
     public class TorrentModel : INotifyPropertyChanged
     {
         private string urlTorrent;
@@ -11,6 +14,9 @@ namespace Torrents
         private int distribute;
         private int download;
 
+        /// <summary>
+        /// Метод для ссылки на торрент
+        /// </summary>
         public string UrlTorrent
         {
             get => urlTorrent;
@@ -20,6 +26,9 @@ namespace Torrents
                 OnPropertyChanged("urlTorrent");
             }
         }
+        /// <summary>
+        /// Метод для названия торрента
+        /// </summary>
         public string Name
         {
             get => name;
@@ -29,6 +38,9 @@ namespace Torrents
                 OnPropertyChanged("name");
             }
         }
+        /// <summary>
+        /// Метод на размер торрента
+        /// </summary>
         public string Size
         {
             get => size;
@@ -38,6 +50,9 @@ namespace Torrents
                 OnPropertyChanged("size");
             }
         }
+        /// <summary>
+        /// Метод для количества раздающих торрент
+        /// </summary>
         public int Distribute
         {
             get => distribute;
@@ -47,6 +62,9 @@ namespace Torrents
                 OnPropertyChanged("distribute");
             }
         }
+        /// <summary>
+        /// Метод для количества скачивающих торрент
+        /// </summary>
         public int Download
         {
             get => download;
