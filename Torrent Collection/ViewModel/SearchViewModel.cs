@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.Windows;
 using Torrents;
 
 namespace Torrent_Collection.ViewModel
@@ -47,8 +45,7 @@ namespace Torrent_Collection.ViewModel
                 Indeterminate = true;
                 TorrentCollection = logicWeb.Search(obj as string);
                 Indeterminate = false;
-            }
-            );
+            });
         });
 
         /*public RelayCommand Download_Click => new RelayCommand(obj =>

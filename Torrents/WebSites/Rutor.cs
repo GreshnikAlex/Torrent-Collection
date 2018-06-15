@@ -8,6 +8,13 @@ namespace Torrents.WebSites
     /// </summary>
     public class Rutor : LogicQuery
     {
+        private static string urlSite = "http://the-rutor.org";
+
+        /// <summary>
+        /// Метод для доступа к адресу сайта
+        /// </summary>
+        public static string UrlSite { get => urlSite; }
+
         /// <summary>
         /// Функция для реализации работы поиска по сайту
         /// </summary>
@@ -17,23 +24,23 @@ namespace Torrents.WebSites
         {
             ObservableCollection<TorrentModel> Torrents = new ObservableCollection<TorrentModel>();
 
-            string Page = GET_Query($"http://rutor.info/search/0/0/000/2/{Query}");
+            string Page = GET($"{UrlSite}/search/0/0/000/2/{Query}");
 
             string[] pageSplit = Page.Split(new char[] { '<', '>', '"' });
 
-            for (int i = 0; i < pageSplit.Length - 72; i++)
+            for (int i = 0; i < pageSplit.Length - 56; i++)
             {
-                if (pageSplit[i].Contains("http://d.rutor.info/download/"))
+                if (pageSplit[i].Contains("/parse/d.rutor.org/download/"))
                 {
                     var torrent = new TorrentModel();
 
                     try
                     {
-                        i += 24;
-                        torrent.UrlTorrent = $"http://rutor.info{pageSplit[i]}";
+                        i += 12;
+                        torrent.UrlTorrent = $"{UrlSite}{pageSplit[i]}";
                         i += 2;
                         torrent.Name = pageSplit[i].Replace("&#039;", "'");
-                        i += 20;
+                        i += 14;
                         torrent.Size = pageSplit[i].Replace("&nbsp;", " ");
                         i += 16;
                         torrent.Distribute = Convert.ToInt32(pageSplit[i].Replace("&nbsp;", ""));

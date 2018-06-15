@@ -25,7 +25,8 @@ namespace Torrents
         /// <returns>Возвращает колекцию данных торрентов</returns>
         public ObservableCollection<TorrentModel> Search(string Query)
         {
-            return rutor.Search(Query);
+            var collection = rutor.Search(Query);
+            return collection;
         }
     }
 }

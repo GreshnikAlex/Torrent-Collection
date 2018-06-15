@@ -13,39 +13,11 @@ namespace Torrents
         HttpWebResponse webResponse = null;
 
         /// <summary>
-        /// Метод для POST запросов на сайт
-        /// </summary>
-        /// <param name="url">Адрес</param>
-        /// <param name="param">Параметры</param>
-        /// <returns>Возвращает страницу в виде HTML</returns>
-        public string POST_Query(string url, string param)
-        {
-            webRequest = (HttpWebRequest)WebRequest.Create(url);
-
-            var data = Encoding.ASCII.GetBytes(param);
-
-            webRequest.Method = "POST";
-            webRequest.ContentType = "application/x-www-form-urlencoded";
-            webRequest.ContentLength = data.Length;
-
-            using (var stream = webRequest.GetRequestStream())
-            {
-                stream.Write(data, 0, data.Length);
-            }
-
-            webResponse = (HttpWebResponse)webRequest.GetResponse();
-
-            var page = new StreamReader(webResponse.GetResponseStream(), Encoding.UTF8).ReadToEnd();
-
-            return page;
-        }
-
-        /// <summary>
         /// Метод для GET запросов на сайт
         /// </summary>
         /// <param name="url">Адрес с параметрами</param>
         /// <returns>Возвращает страницу в виде HTML</returns>
-        public string GET_Query(string url)
+        public string GET(string url)
         {
             webRequest = (HttpWebRequest)WebRequest.Create(url);
             webRequest.MaximumAutomaticRedirections = 4;
