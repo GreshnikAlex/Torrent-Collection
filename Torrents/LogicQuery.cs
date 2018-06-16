@@ -24,18 +24,23 @@ namespace Torrents
             webRequest.MaximumResponseHeadersLength = 4;
             webRequest.Credentials = CredentialCache.DefaultCredentials;
 
-            webResponse = (HttpWebResponse)webRequest.GetResponse();
+            try
+            {
+                webResponse = (HttpWebResponse)webRequest.GetResponse();
 
-            Stream stream = webResponse.GetResponseStream();
+                Stream stream = webResponse.GetResponseStream();
 
-            StreamReader streamReader = new StreamReader(stream, Encoding.UTF8);
+                StreamReader streamReader = new StreamReader(stream, Encoding.UTF8);
 
-            var page = streamReader.ReadToEnd();
+                var page = streamReader.ReadToEnd();
 
-            webResponse.Close();
-            streamReader.Close();
+                webResponse.Close();
+                streamReader.Close();
 
-            return page;
+                return page;
+            }
+            catch
+            { return ""; }
         }
     }
 }

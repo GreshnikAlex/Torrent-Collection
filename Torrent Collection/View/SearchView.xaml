@@ -15,22 +15,22 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Margin="5,0,0,2.5" Background="#FF1C1D20">
+        <Grid Grid.Row="0" Margin="5,0,0,2.5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="2.5"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="125"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
+                <Grid Grid.Column="0" Margin="0,0,1.5,0">
+                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding Search_Click}" CommandParameter="{Binding ElementName=SearchText, Path=Text}" Margin="0" Height="36" Content="Поиск" Background="#FF2A2A2D" />
+                </Grid>
+                <Grid Grid.Column="1" Margin="1.5,0,0,0">
                     <TextBlock Style="{StaticResource HintStyle}" Text="Что мне найти?"/>
                     <TextBox x:Name="SearchText" Style="{StaticResource TextBoxStyle}" BorderThickness="0,0,0,2"/>
-                </Grid>
-                <Grid Grid.Column="1">
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding Search_Click}" CommandParameter="{Binding ElementName=SearchText, Path=Text}" Margin="0" Height="36" Content="Поиск" />
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">
@@ -47,7 +47,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Grid Background="#FF1C1D20" Margin="5,2.5,0,0">
+                            <Grid Background="#FF1C1D20" Margin="5,2.5,0,0" ToolTip="{Binding Path=Name}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="810*"/>
                                     <ColumnDefinition Width="50"/>
@@ -59,10 +59,15 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <Grid>
-                                        <TextBlock Text="{Binding Path=Name}" Margin="3,0,0,0" Foreground="White" FontFamily="Consolas" FontSize="20"/>
+                                    <Grid Margin="0,3,0,0">
+                                        <TextBlock
+                                            Text="{Binding Path=Name}"
+                                            Margin="3,0,0,0"
+                                            Foreground="White"
+                                            FontFamily="Consolas"
+                                            FontSize="20"/>
                                     </Grid>
-                                    <Grid Grid.Row="1">
+                                    <Grid Grid.Row="1" Margin="0,0,0,3">
                                         <StackPanel Margin="3,0,0,0" Orientation="Horizontal">
                                             <TextBlock Text="{Binding Path=Size, StringFormat=Размер: {0} |}" Foreground="White" FontFamily="Consolas" FontSize="18"/>
                                             <TextBlock Text="{Binding Path=Distribute, StringFormat=Сидов: {0} |}" Foreground="Green" Margin="3,0,0,0" FontFamily="Consolas" FontSize="18"/>
