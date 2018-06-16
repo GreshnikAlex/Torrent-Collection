@@ -22,7 +22,8 @@
                 <Image/>
                 <TextBlock
                     Style="{StaticResource HintStyle}"
-                    Text="GreshnikAlex" 
+                    DataContext="{Binding User}"
+                    Text="{Binding Path=Login}" 
                     HorizontalAlignment="Left"
                     VerticalAlignment="Bottom"/>
                 </Grid>

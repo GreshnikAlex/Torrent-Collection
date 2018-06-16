@@ -21,35 +21,59 @@
                     <Image/>
                 </Grid>
                 <Grid Grid.Column="1">
-                    <StackPanel>
+                    <StackPanel DataContext="{Binding User}">
                         <Grid Margin="1.5">
-                            <TextBlock Style="{StaticResource HintStyle}" Text="Логин"/>
-                            <TextBox Style="{StaticResource TextBoxStyle}"/>
+                            <TextBlock
+                                Style="{StaticResource HintStyle}"
+                                Text="Логин"/>
+                            <TextBox
+                                Style="{StaticResource TextBoxStyle}"
+                                Text="{Binding Path=Login}"/>
                         </Grid>
                         <Grid Margin="1.5">
-                            <TextBlock Style="{StaticResource HintStyle}" Text="Пароль"/>
-                            <TextBox Style="{StaticResource TextBoxStyle}"/>
+                            <TextBlock
+                                Style="{StaticResource HintStyle}"
+                                Text="Пароль"/>
+                            <TextBox
+                                Style="{StaticResource TextBoxStyle}"
+                                Text="{Binding Path=Password}"/>
                         </Grid>
                         <Grid Margin="1.5">
-                            <TextBlock Style="{StaticResource HintStyle}" Text="E-mail"/>
-                            <TextBox Style="{StaticResource TextBoxStyle}"/>
+                            <TextBlock
+                                Style="{StaticResource HintStyle}"
+                                Text="E-mail"/>
+                            <TextBox
+                                Style="{StaticResource TextBoxStyle}"
+                                Text="{Binding Path=Email}"/>
                         </Grid>
                         <Grid Margin="1.5">
-                            <TextBlock Style="{StaticResource HintStyle}" Text="Имя"/>
-                            <TextBox Style="{StaticResource TextBoxStyle}"/>
+                            <TextBlock
+                                Style="{StaticResource HintStyle}" 
+                                Text="Имя"/>
+                            <TextBox 
+                                Style="{StaticResource TextBoxStyle}"
+                                Text="{Binding Path=FirstName}"/>
                         </Grid>
                     </StackPanel>
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">
                 <StackPanel>
-                    <Grid Margin="1.5">
-                        <TextBlock Style="{StaticResource HintStyle}" Text="Отчество"/>
-                        <TextBox Style="{StaticResource TextBoxStyle}"/>
+                    <Grid Margin="1.5" DataContext="{Binding User}">
+                        <TextBlock
+                            Style="{StaticResource HintStyle}"
+                            Text="Отчество"/>
+                        <TextBox 
+                            Style="{StaticResource TextBoxStyle}"
+                            Text="{Binding Path=MiddleName}"/>
                     </Grid>
-                    <Grid Margin="1.5">
-                        <TextBlock Style="{StaticResource HintStyle}" Text="Фамилия"/>
-                        <TextBox Style="{StaticResource TextBoxStyle}"/>
+                    <Grid Margin="1.5" DataContext="{Binding User}">
+                        <TextBlock
+                            Style="{StaticResource HintStyle}"
+                            Text="Фамилия"/>
+                        <TextBox
+                            Style="{StaticResource TextBoxStyle}"
+                            Text="{Binding Path=SurName}"/>
                     </Grid>
                     <Button Style="{StaticResource ButtonStyle}" Content="Регистрация"/>
                     <Button Style="{StaticResource ButtonStyle}" Command="{Binding Back_Click}" Content="Назад"/>

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
+using Torrent_Collection.Model;
 
 namespace Torrent_Collection.ViewModel
 {
@@ -9,12 +10,14 @@ namespace Torrent_Collection.ViewModel
     /// </summary>
     public class MainViewModel : INotifyPropertyChanged
     {
-        Page loginPage;
-        Page regPage;
-        Page selectedPage;
+        private Page loginPage;
+        private Page regPage;
+        private Page selectedPage;
 
-        Page searchPage;
-        Page selectedGlobalPage;
+        private Page searchPage;
+        private Page selectedGlobalPage;
+
+        private UserModel user = new UserModel();
 
         private int opacityLoginError;
 
@@ -23,6 +26,7 @@ namespace Torrent_Collection.ViewModel
         /// </summary>
         public MainViewModel()
         {
+            User = new UserModel();
             LoginPage = new View.LoginView(this);
             RegPage = new View.RegView(this);
             OpacityLoginError = 0;
@@ -91,6 +95,18 @@ namespace Torrent_Collection.ViewModel
             }
         }
         /// <summary>
+        /// Пользователь
+        /// </summary>
+        public UserModel User
+        {
+            get => user;
+            set
+            {
+                user = value;
+                OnPropertyChanged(nameof(user));
+            }
+        }
+        /// <summary>
         /// Метод для отображения ошибки о не правильно вводе данных
         /// </summary>
         public int OpacityLoginError
@@ -117,6 +133,7 @@ namespace Torrent_Collection.ViewModel
         /// </summary>
         public RelayCommand Reg_Click => new RelayCommand(obj =>
         {
+            User = new UserModel();
             SelectedPage = RegPage;
         });
         /// <summary>
@@ -124,6 +141,7 @@ namespace Torrent_Collection.ViewModel
         /// </summary>
         public RelayCommand Back_Click => new RelayCommand(obj =>
         {
+            User = new UserModel();
             SelectedPage = LoginPage;
         });
 
@@ -140,6 +158,7 @@ namespace Torrent_Collection.ViewModel
         /// </summary>
         public RelayCommand Exit_Click => new RelayCommand(obj => 
         {
+            User = new UserModel();
             SelectedPage = LoginPage;
             SearchPage = null;
             SelectedGlobalPage = null;
