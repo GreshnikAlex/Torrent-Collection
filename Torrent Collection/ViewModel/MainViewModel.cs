@@ -1,7 +1,10 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using Torrent_Collection.Model;
@@ -183,7 +186,11 @@ namespace Torrent_Collection.ViewModel
                     };
                     connection.Open();
 
-                    var pass = (obj as PasswordBox).Password;
+                    //Шифрование пароля
+                    var md5 = new MD5CryptoServiceProvider();
+                    byte[] checkSum = md5.ComputeHash(Encoding.UTF8.GetBytes((obj as PasswordBox).Password));
+                    var pass = BitConverter.ToString(checkSum).Replace("-", String.Empty);
+
                     if (User.Login == "GreshnikAlex" && pass == "02051995")
                     {
                         SearchPage = searchPage;
