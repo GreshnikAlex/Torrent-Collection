@@ -1,5 +1,8 @@
 ﻿using System.ComponentModel;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using Torrent_Collection.Model;
 
@@ -20,6 +23,8 @@ namespace Torrent_Collection.ViewModel
         private UserModel user = new UserModel();
 
         private int opacityLoginError;
+        private bool indeterminate;
+        private bool enabledForm;
 
         /// <summary>
         /// Конструктор главной модели придставления
@@ -27,9 +32,10 @@ namespace Torrent_Collection.ViewModel
         public MainViewModel()
         {
             User = new UserModel();
-            LoginPage = new View.LoginView(this);
-            RegPage = new View.RegView(this);
+            LoginPage = new View.LoginView() { DataContext = this};
+            RegPage = new View.RegView() { DataContext = this };
             OpacityLoginError = 0;
+            EnabledForm = true;
             SelectedPage = LoginPage;
         }
 
@@ -118,22 +124,70 @@ namespace Torrent_Collection.ViewModel
                 OnPropertyChanged("opacityLoginError");
             }
         }
+        /// <summary>
+        /// Метод для отображения загрузки
+        /// </summary>
+        public bool Indeterminate
+        {
+            get => indeterminate;
+            set
+            {
+                indeterminate = value;
+                OnPropertyChanged(nameof(indeterminate));
+            }
+        }
+        /// <summary>
+        /// Метод для включения и выключения кнопок
+        /// </summary>
+        public bool EnabledForm
+        {
+            get => enabledForm;
+            set
+            {
+                enabledForm = value;
+                OnPropertyChanged(nameof(enabledForm));
+            }
+        }
 
         /// <summary>
         /// Комманда для кнопки "Вход"
         /// </summary>
         public RelayCommand Enter_Click => new RelayCommand(obj =>
         {
-            //OpacityLoginError = 1;
-            SearchPage = new View.SearchView();
-            SelectedPage = new View.GlobalView(this);
+            EnabledForm = false;
+            var searchPage = new View.SearchView();
+            var globalPage = new View.GlobalView(this);
+            Task.Factory.StartNew(() =>
+            {
+                OpacityLoginError = 0;
+                Indeterminate = true;
+                var connection = new SqlConnection()
+                {
+                    ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString
+                };
+                connection.Open();
+
+                var pass = (obj as PasswordBox).Password;
+                if (User.Login == "GreshnikAlex" && pass == "02051995")
+                {
+                    SearchPage = searchPage;
+                    SelectedPage = globalPage;
+                }
+                else
+                {
+                    OpacityLoginError = 1;
+                    searchPage = null;
+                    globalPage = null;
+                }
+                Indeterminate = false;
+                EnabledForm = true;
+            });
         });
         /// <summary>
         /// Метод команды для клика на кнопку "Регистрация"
         /// </summary>
         public RelayCommand Reg_Click => new RelayCommand(obj =>
         {
-            User = new UserModel();
             SelectedPage = RegPage;
         });
         /// <summary>
@@ -141,8 +195,8 @@ namespace Torrent_Collection.ViewModel
         /// </summary>
         public RelayCommand Back_Click => new RelayCommand(obj =>
         {
-            User = new UserModel();
             SelectedPage = LoginPage;
+            User.Email = null;
         });
 
         /// <summary>
@@ -151,17 +205,16 @@ namespace Torrent_Collection.ViewModel
         public RelayCommand Search_Click => new RelayCommand(obj =>
         {
             SelectedGlobalPage = SearchPage;
-
         });
         /// <summary>
         /// Команда для кнопки "Выход"
         /// </summary>
         public RelayCommand Exit_Click => new RelayCommand(obj => 
         {
-            User = new UserModel();
-            SelectedPage = LoginPage;
+            User.Email = null;
             SearchPage = null;
             SelectedGlobalPage = null;
+            SelectedPage = LoginPage;
         });
 
         //INotifyPropertyChanged

@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="./Style/Btn.xaml"/>
                 <ResourceDictionary Source="./Style/Txt.xaml"/>
                 <ResourceDictionary Source="./Style/Hint.xaml"/>
+                <ResourceDictionary Source="./Style/Pass.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

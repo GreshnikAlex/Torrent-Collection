@@ -13,70 +13,75 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <Image/>
-                </Grid>
-                <Grid Grid.Column="1">
+                <Grid>
                     <StackPanel DataContext="{Binding User}">
                         <Grid Margin="1.5">
-                            <TextBlock
-                                Style="{StaticResource HintStyle}"
-                                Text="Логин"/>
-                            <TextBox
-                                Style="{StaticResource TextBoxStyle}"
-                                Text="{Binding Path=Login}"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" Margin="0,0,3,0">
+                                <Image
+                                    HorizontalAlignment="Center"
+                                    Source="/Torrent Collection;component/Resources/Login_Reg/Username.png"
+                                    ToolTip="Логи́н (англ. Login) — имя (идентификатор) учётной записи пользователя в компьютерной системе, а также процедура входа (идентификации и затем аутентификации) пользователя в компьютерную систему, как правило, путём указания имени учётной записи и пароля."/>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <TextBox
+                                    Style="{StaticResource TextBoxStyle}"
+                                    Text="{Binding Path=Login}"
+                                    ToolTip="Логин"/>
+                            </Grid>
                         </Grid>
                         <Grid Margin="1.5">
-                            <TextBlock
-                                Style="{StaticResource HintStyle}"
-                                Text="Пароль"/>
-                            <TextBox
-                                Style="{StaticResource TextBoxStyle}"
-                                Text="{Binding Path=Password}"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" Margin="0,0,3,0">
+                                <Image
+                                    HorizontalAlignment="Center"
+                                    Source="/Torrent Collection;component/Resources/Login_Reg/Password.png"
+                                    ToolTip="Пароль (фр. parole — слово) — условное слово или набор знаков, предназначенный для подтверждения личности или полномочий."/>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <PasswordBox
+                                    x:Name="pass"
+                                    Style="{StaticResource PasswordBoxStyle}"
+                                    ToolTip="Пароль"/>
+                            </Grid>
                         </Grid>
                         <Grid Margin="1.5">
-                            <TextBlock
-                                Style="{StaticResource HintStyle}"
-                                Text="E-mail"/>
-                            <TextBox
-                                Style="{StaticResource TextBoxStyle}"
-                                Text="{Binding Path=Email}"/>
-                        </Grid>
-                        <Grid Margin="1.5">
-                            <TextBlock
-                                Style="{StaticResource HintStyle}" 
-                                Text="Имя"/>
-                            <TextBox 
-                                Style="{StaticResource TextBoxStyle}"
-                                Text="{Binding Path=FirstName}"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" Margin="0,0,3,0">
+                                <Image
+                                    HorizontalAlignment="Center"
+                                    Source="/Torrent Collection;component/Resources/Login_Reg/Email.png"
+                                    ToolTip="Электро́нная по́чта (англ. email, e-mail, от англ. electronic mail) — технология и служба по пересылке и получению электронных сообщений (называемых «письма», «электронные письма» или «сообщения») между пользователями компьютерной сети (в том числе — Интернета)"/>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <TextBox
+                                    Style="{StaticResource TextBoxStyle}"
+                                    Text="{Binding Path=Email}"
+                                    ToolTip="E-mail"/>
+                            </Grid>
                         </Grid>
                     </StackPanel>
                 </Grid>
             </Grid>
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" Margin="0,3,0,0">
                 <StackPanel>
-                    <Grid Margin="1.5" DataContext="{Binding User}">
-                        <TextBlock
-                            Style="{StaticResource HintStyle}"
-                            Text="Отчество"/>
-                        <TextBox 
-                            Style="{StaticResource TextBoxStyle}"
-                            Text="{Binding Path=MiddleName}"/>
-                    </Grid>
-                    <Grid Margin="1.5" DataContext="{Binding User}">
-                        <TextBlock
-                            Style="{StaticResource HintStyle}"
-                            Text="Фамилия"/>
-                        <TextBox
-                            Style="{StaticResource TextBoxStyle}"
-                            Text="{Binding Path=SurName}"/>
-                    </Grid>
-                    <Button Style="{StaticResource ButtonStyle}" Content="Регистрация"/>
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding Back_Click}" Content="Назад"/>
+                    <Button
+                        Style="{StaticResource ButtonStyle}"
+                        CommandParameter="{Binding ElementName=pass}"
+                        Content="Регистрация"/>
+                    <Button
+                        Style="{StaticResource ButtonStyle}"
+                        Command="{Binding Back_Click}"
+                        Content="Назад"/>
                 </StackPanel>
             </Grid>
         </Grid>
