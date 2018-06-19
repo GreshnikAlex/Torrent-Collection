@@ -13,19 +13,19 @@ namespace Torrent_Collection.ViewModel
     /// </summary>
     public class MainViewModel : INotifyPropertyChanged
     {
-        private Page loginPage;
-        private Page regPage;
-        private Page selectedPage;
+        private Page loginPage; //Страница входа
+        private Page regPage; //Страница регистрации
+        private Page selectedPage; //Активная страница
 
-        private Page searchPage;
-        private Page selectedGlobalPage;
+        private Page searchPage; //Страница поиска
+        private Page selectedGlobalPage; //Активная страница на глобальной странице
 
-        private UserModel user = new UserModel();
+        private UserModel user; //Модель "Пользователь"
 
-        private int opacityLoginError;
-        private bool indeterminate;
-        private bool enabledForm;
-        private string errorString;
+        private int opacityLoginError; //Показывает/Скрывает ошибку
+        private bool indeterminate; //Показывает/Скрывает загрузку
+        private bool enabledForm; //Включает/Отключает текстовые поля и кнопки
+        private string errorString; //Сообщение с ошибкой
 
         /// <summary>
         /// Конструктор главной модели придставления
@@ -40,6 +40,7 @@ namespace Torrent_Collection.ViewModel
             SelectedPage = LoginPage;
         }
 
+        //Методы
         /// <summary>
         /// Метод для перехода на страницу входа
         /// </summary>
@@ -76,7 +77,6 @@ namespace Torrent_Collection.ViewModel
                 OnPropertyChanged("selectedPage");
             }
         }
-
         /// <summary>
         /// Метод для перехода на страницу поиска
         /// </summary>
@@ -162,6 +162,7 @@ namespace Torrent_Collection.ViewModel
             }
         }
 
+        //Страница входа
         /// <summary>
         /// Комманда для кнопки "Вход"
         /// </summary>
@@ -215,6 +216,8 @@ namespace Torrent_Collection.ViewModel
         {
             SelectedPage = RegPage;
         });
+
+        //Страница регистрации
         /// <summary>
         /// Команда для кнопки "Назад"
         /// </summary>
@@ -224,6 +227,7 @@ namespace Torrent_Collection.ViewModel
             User.Email = null;
         });
 
+        //Глобальная страница
         /// <summary>
         /// Команда для кнопки "Поиск"
         /// </summary>
