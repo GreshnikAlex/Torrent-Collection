@@ -10,12 +10,7 @@ namespace Torrent_Collection.Model
     {
         //Основные поля
         private string login;
-        private string password;
         private string email;
-        //Второстепенные поля
-        private string firstName;
-        private string middleName;
-        private string surName;
 
         /// <summary>
         /// Логин
@@ -30,18 +25,6 @@ namespace Torrent_Collection.Model
             }
         }
         /// <summary>
-        /// Пароль
-        /// </summary>
-        public string Password
-        {
-            get => password;
-            set
-            {
-                password = value;
-                OnPropertyChanged(nameof(password));
-            }
-        }
-        /// <summary>
         /// E-mail
         /// </summary>
         public string Email
@@ -51,42 +34,6 @@ namespace Torrent_Collection.Model
             {
                 email = value;
                 OnPropertyChanged(nameof(email));
-            }
-        }
-        /// <summary>
-        /// Имя
-        /// </summary>
-        public string FirstName
-        {
-            get => firstName;
-            set
-            {
-                firstName = value;
-                OnPropertyChanged(nameof(firstName));
-            }
-        }
-        /// <summary>
-        /// Отчество
-        /// </summary>
-        public string MiddleName
-        {
-            get => middleName;
-            set
-            {
-                middleName = value;
-                OnPropertyChanged(nameof(middleName));
-            }
-        }
-        /// <summary>
-        /// Фамилия
-        /// </summary>
-        public string SurName
-        {
-            get => surName;
-            set
-            {
-                surName = value;
-                OnPropertyChanged(nameof(surName));
             }
         }
 

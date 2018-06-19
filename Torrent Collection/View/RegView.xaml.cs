@@ -7,10 +7,9 @@ namespace Torrent_Collection.View
     /// </summary>
     public partial class RegView : Page
     {
-        public RegView(ViewModel.MainViewModel mainViewModel)
-        {
-            InitializeComponent();
-            DataContext = mainViewModel;
-        }
+        /// <summary>
+        /// Конструктор для инициализации компонентов
+        /// </summary>
+        public RegView() => InitializeComponent();
     }
 }

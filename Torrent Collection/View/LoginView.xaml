@@ -3,13 +3,9 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:viewmodel="clr-namespace:Torrent_Collection.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="490" d:DesignWidth="890"
       Title="Страница входа" Foreground="{StaticResource Text}">
-    <!--<Page.DataContext>
-        <viewmodel:MainViewModel/>
-    </Page.DataContext>-->
     <Grid>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="400">
 
@@ -19,34 +15,76 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Grid>
+            <Grid Grid.Row="0">
                 <TextBlock Text="Torrent Collection" FontSize="30" FontFamily="Consolas" TextAlignment="Center"/>
             </Grid>
-            <Grid Grid.Row="1">
-                <StackPanel Margin="0,3,0,1.5" DataContext="{Binding User}">
-                    <Grid Margin="0,0,0,1.5">
-                        <TextBlock
-                            Style="{StaticResource HintStyle}"
-                            Text="Логин"/>
+            <Grid Grid.Row="1" DataContext="{Binding User}" Margin="0,3,0,1.5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="1.5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="0,0,3,0">
+                        <Image
+                            HorizontalAlignment="Center"
+                            Source="/Torrent Collection;component/Resources/Login_Reg/Username.png"
+                            ToolTip="Логи́н (англ. Login) — имя (идентификатор) учётной записи пользователя в компьютерной системе, а также процедура входа (идентификации и затем аутентификации) пользователя в компьютерную систему, как правило, путём указания имени учётной записи и пароля."/>
+                    </Grid>
+                    <Grid Grid.Column="1">
                         <TextBox
                             Style="{DynamicResource TextBoxStyle}"
-                            Text="{Binding Path=Login}"/>
+                            Text="{Binding Path=Login}"
+                            IsEnabled="{Binding EnabledForm}"
+                            ToolTip="Логин"/>
                     </Grid>
-                    <Grid Margin="0,1.5,0,0">
-                        <TextBlock
-                            Style="{StaticResource HintStyle}"
-                            Text="Пароль"/>
-                        <TextBox
-                            Style="{DynamicResource TextBoxStyle}" 
-                            Text="{Binding Path=Password}"/>
+                </Grid>
+                <Grid Grid.Row="1" Margin="1.5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="0,0,3,0">
+                        <Image
+                            HorizontalAlignment="Center"
+                            Source="/Torrent Collection;component/Resources/Login_Reg/Password.png"
+                            ToolTip="Пароль (фр. parole — слово) — условное слово или набор знаков, предназначенный для подтверждения личности или полномочий."/>
                     </Grid>
-                </StackPanel>
+                    <Grid Grid.Column="1">
+                        <PasswordBox
+                            Style="{DynamicResource PasswordBoxStyle}"
+                            IsEnabled="{Binding EnabledForm}"
+                            x:Name="pass"
+                            ToolTip="Пароль"/>
+                    </Grid>
+                </Grid>
             </Grid>
             <Grid Grid.Row="2" Margin="0,1.5,0,0">
-                <StackPanel>
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding Enter_Click}" Content="Войти"/>
-                    <Button Style="{StaticResource ButtonStyle}" Command="{Binding Reg_Click}" Content="Регистрация"/>
-                </StackPanel>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2.7"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <ProgressBar Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF007ACC" BorderThickness="0" IsIndeterminate="{Binding Indeterminate}"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <StackPanel>
+                        <Button
+                            Style="{StaticResource ButtonStyle}"
+                            Command="{Binding Enter_Click}"
+                            CommandParameter="{Binding ElementName=pass}"
+                            IsEnabled="{Binding EnabledForm}"
+                            Content="Войти"/>
+                        <Button
+                            Style="{StaticResource ButtonStyle}"
+                            Command="{Binding Reg_Click}"
+                            IsEnabled="{Binding EnabledForm}"
+                            Content="Регистрация"/>
+                    </StackPanel>
+                </Grid>
             </Grid>
             <Grid Grid.Row="3">
                 <TextBlock Text="Логин или Пароль не верен" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFE62B1A" FontFamily="Comic Sans MS" Opacity="{Binding OpacityLoginError}"/>
