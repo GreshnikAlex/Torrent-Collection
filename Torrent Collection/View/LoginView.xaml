@@ -87,7 +87,7 @@
                 </Grid>
             </Grid>
             <Grid Grid.Row="3">
-                <TextBlock Text="Логин или Пароль не верен" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFE62B1A" FontFamily="Comic Sans MS" Opacity="{Binding OpacityLoginError}"/>
+                <TextBlock Text="{Binding ErrorString}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFE62B1A" FontFamily="Comic Sans MS" Opacity="{Binding OpacityLoginError}"/>
             </Grid>
         </Grid>
     </Grid>

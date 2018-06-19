@@ -25,6 +25,7 @@ namespace Torrent_Collection.ViewModel
         private int opacityLoginError;
         private bool indeterminate;
         private bool enabledForm;
+        private string errorString;
 
         /// <summary>
         /// Конструктор главной модели придставления
@@ -148,6 +149,18 @@ namespace Torrent_Collection.ViewModel
                 OnPropertyChanged(nameof(enabledForm));
             }
         }
+        /// <summary>
+        /// Сообщение ошибки
+        /// </summary>
+        public string ErrorString
+        {
+            get => errorString;
+            set
+            {
+                errorString = value;
+                OnPropertyChanged(nameof(errorString));
+            }
+        }
 
         /// <summary>
         /// Комманда для кнопки "Вход"
@@ -159,28 +172,40 @@ namespace Torrent_Collection.ViewModel
             var globalPage = new View.GlobalView(this);
             Task.Factory.StartNew(() =>
             {
-                OpacityLoginError = 0;
-                Indeterminate = true;
-                var connection = new SqlConnection()
+                try
                 {
-                    ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString
-                };
-                connection.Open();
+                    OpacityLoginError = 0;
+                    Indeterminate = true;
+                    var connection = new SqlConnection()
+                    {
+                        ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString
+                    };
+                    connection.Open();
 
-                var pass = (obj as PasswordBox).Password;
-                if (User.Login == "GreshnikAlex" && pass == "02051995")
-                {
-                    SearchPage = searchPage;
-                    SelectedPage = globalPage;
+                    var pass = (obj as PasswordBox).Password;
+                    if (User.Login == "GreshnikAlex" && pass == "02051995")
+                    {
+                        SearchPage = searchPage;
+                        SelectedPage = globalPage;
+                    }
+                    else
+                    {
+                        ErrorString = "Логин или Пароль не верен...";
+                        OpacityLoginError = 1;
+                        searchPage = null;
+                        globalPage = null;
+                    }
                 }
-                else
+                catch
                 {
+                    ErrorString = "Что-то не так, попробуйте позже...";
                     OpacityLoginError = 1;
-                    searchPage = null;
-                    globalPage = null;
                 }
-                Indeterminate = false;
-                EnabledForm = true;
+                finally
+                {
+                    Indeterminate = false;
+                    EnabledForm = true;
+                }
             });
         });
         /// <summary>
