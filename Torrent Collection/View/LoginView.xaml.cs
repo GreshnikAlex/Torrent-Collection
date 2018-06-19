@@ -7,10 +7,9 @@ namespace Torrent_Collection.View
     /// </summary>
     public partial class LoginView : Page
     {
-        public LoginView(ViewModel.MainViewModel mainViewModel)
-        {
-            InitializeComponent();
-            DataContext = mainViewModel;
-        }
+        /// <summary>
+        /// Конструктор для инициализации компонентов
+        /// </summary>
+        public LoginView() => InitializeComponent();
     }
 }
