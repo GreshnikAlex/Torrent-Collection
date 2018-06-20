@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using Torrent_Collection.Model;
 
@@ -184,6 +185,11 @@ namespace Torrent_Collection.ViewModel
                     {
                         ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString
                     };
+
+                    var command = new SqlCommand("Verification", connection)
+                    {
+                        CommandType = System.Data.CommandType.StoredProcedure,
+                    };
                     connection.Open();
 
                     //Шифрование пароля
@@ -191,7 +197,14 @@ namespace Torrent_Collection.ViewModel
                     byte[] checkSum = md5.ComputeHash(Encoding.UTF8.GetBytes((obj as PasswordBox).Password));
                     var pass = BitConverter.ToString(checkSum).Replace("-", String.Empty);
 
-                    if (User.Login == "GreshnikAlex" && pass == "02051995")
+                    command.Parameters.AddWithValue("@login", user.Login.ToLower());
+                    command.Parameters.AddWithValue("@password", pass);
+
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    { User.Email = reader.GetValue(0).ToString(); }
+
+                    if (User.Email != null)
                     {
                         SearchPage = searchPage;
                         SelectedPage = globalPage;
@@ -225,6 +238,53 @@ namespace Torrent_Collection.ViewModel
         });
 
         //Страница регистрации
+        /// <summary>
+        /// Регистрация
+        /// </summary>
+        public RelayCommand Registration_Click => new RelayCommand(obj =>
+        {
+            Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    OpacityLoginError = 0;
+                    Indeterminate = true;
+
+                    var connection = new SqlConnection()
+                    {
+                        ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString
+                    };
+
+                    var command = new SqlCommand("Registration", connection)
+                    {
+                        CommandType = System.Data.CommandType.StoredProcedure,
+                    };
+                    connection.Open();
+
+                    //Шифрование пароля
+                    var md5 = new MD5CryptoServiceProvider();
+                    byte[] checkSum = md5.ComputeHash(Encoding.UTF8.GetBytes((obj as PasswordBox).Password));
+                    var pass = BitConverter.ToString(checkSum).Replace("-", String.Empty);
+
+                    command.Parameters.AddWithValue("@login", user.Login.ToLower());
+                    command.Parameters.AddWithValue("@password", pass);
+                    command.Parameters.AddWithValue("@email", user.Email.ToLower());
+
+                    command.ExecuteNonQuery();
+                    MessageBox.Show("Поздравляем, вы успешно прошли регистрацию, теперь вы можете авторизоваться.", "Регистрация", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch
+                {
+                    ErrorString = "Что-то не так, попробуйте позже...";
+                    OpacityLoginError = 1;
+                }
+                finally
+                {
+                    Indeterminate = false;
+                    EnabledForm = true;
+                }
+            });
+        });
         /// <summary>
         /// Команда для кнопки "Назад"
         /// </summary>

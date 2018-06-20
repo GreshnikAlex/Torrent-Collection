@@ -11,6 +11,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid>
@@ -30,6 +31,7 @@
                                 <TextBox
                                     Style="{StaticResource TextBoxStyle}"
                                     Text="{Binding Path=Login}"
+                                    IsEnabled="{Binding EnabledForm}"
                                     ToolTip="Логин"/>
                             </Grid>
                         </Grid>
@@ -48,6 +50,7 @@
                                 <PasswordBox
                                     x:Name="pass"
                                     Style="{StaticResource PasswordBoxStyle}"
+                                    IsEnabled="{Binding EnabledForm}"
                                     ToolTip="Пароль"/>
                             </Grid>
                         </Grid>
@@ -66,6 +69,7 @@
                                 <TextBox
                                     Style="{StaticResource TextBoxStyle}"
                                     Text="{Binding Path=Email}"
+                                    IsEnabled="{Binding EnabledForm}"
                                     ToolTip="E-mail"/>
                             </Grid>
                         </Grid>
@@ -73,16 +77,31 @@
                 </Grid>
             </Grid>
             <Grid Grid.Row="1" Margin="0,3,0,0">
-                <StackPanel>
-                    <Button
-                        Style="{StaticResource ButtonStyle}"
-                        CommandParameter="{Binding ElementName=pass}"
-                        Content="Регистрация"/>
-                    <Button
-                        Style="{StaticResource ButtonStyle}"
-                        Command="{Binding Back_Click}"
-                        Content="Назад"/>
-                </StackPanel>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2.7"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <ProgressBar Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF007ACC" BorderThickness="0" IsIndeterminate="{Binding Indeterminate}"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <StackPanel>
+                        <Button
+                            Style="{StaticResource ButtonStyle}"
+                            Command="{Binding Registration_Click}"
+                            CommandParameter="{Binding ElementName=pass}"
+                            IsEnabled="{Binding EnabledForm}"
+                            Content="Регистрация"/>
+                        <Button
+                            Style="{StaticResource ButtonStyle}"
+                            Command="{Binding Back_Click}"
+                            IsEnabled="{Binding EnabledForm}"
+                            Content="Назад"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="2">
+                <TextBlock Text="{Binding ErrorString}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFE62B1A" FontFamily="Comic Sans MS" Opacity="{Binding OpacityLoginError}"/>
             </Grid>
         </Grid>
     </Grid>
