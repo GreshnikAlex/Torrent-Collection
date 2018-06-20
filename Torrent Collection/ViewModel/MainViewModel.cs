@@ -23,6 +23,7 @@ namespace Torrent_Collection.ViewModel
         private Page selectedPage; //Активная страница
 
         private Page searchPage; //Страница поиска
+        private Page downloadPage; //Страница загрузок
         private Page selectedGlobalPage; //Активная страница на глобальной странице
 
         private UserModel user; //Модель "Пользователь"
@@ -92,6 +93,18 @@ namespace Torrent_Collection.ViewModel
             {
                 searchPage = value;
                 OnPropertyChanged("searchPage");
+            }
+        }
+        /// <summary>
+        /// Метод для перехода на страницу загрузок
+        /// </summary>
+        public Page DownloadPage
+        {
+            get => downloadPage;
+            set
+            {
+                downloadPage = value;
+                OnPropertyChanged(nameof(downloadPage));
             }
         }
         /// <summary>
@@ -175,6 +188,7 @@ namespace Torrent_Collection.ViewModel
         {
             EnabledForm = false;
             var searchPage = new View.SearchView();
+            var downloadPage = new View.DownloadView();
             var globalPage = new View.GlobalView(this);
             Task.Factory.StartNew(() =>
             {
@@ -209,6 +223,7 @@ namespace Torrent_Collection.ViewModel
                     if (User.Email != null)
                     {
                         SearchPage = searchPage;
+                        DownloadPage = downloadPage;
                         SelectedPage = globalPage;
                     }
                     else
@@ -217,6 +232,7 @@ namespace Torrent_Collection.ViewModel
                         OpacityLoginError = 1;
                         searchPage = null;
                         globalPage = null;
+                        downloadPage = null;
                     }
                 }
                 catch
@@ -340,6 +356,13 @@ namespace Torrent_Collection.ViewModel
         public RelayCommand Search_Click => new RelayCommand(obj =>
         {
             SelectedGlobalPage = SearchPage;
+        });
+        /// <summary>
+        /// Команда для кнопки "Загрузки"
+        /// </summary>
+        public RelayCommand Download_Click => new RelayCommand(obj =>
+        {
+            SelectedGlobalPage = DownloadPage;
         });
         /// <summary>
         /// Команда для кнопки "Выход"

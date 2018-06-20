@@ -35,6 +35,7 @@
                         Content="Поиск"/>
                     <Button
                         Style="{StaticResource ButtonStyle}"
+                        Command="{Binding Download_Click}"
                         Content="Загрузки"/>
                     <Button
                         Style="{StaticResource ButtonStyle}"
