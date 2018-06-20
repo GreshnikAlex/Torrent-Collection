@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -203,6 +204,7 @@ namespace Torrent_Collection.ViewModel
                     var reader = command.ExecuteReader();
                     while (reader.Read())
                     { User.Email = reader.GetValue(0).ToString(); }
+                    reader.Close();
 
                     if (User.Email != null)
                     {
@@ -255,25 +257,62 @@ namespace Torrent_Collection.ViewModel
                         ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString
                     };
 
-                    var command = new SqlCommand("Registration", connection)
+                    connection.Open();
+
+                    var command = new SqlCommand("SearchUser", connection)
                     {
                         CommandType = System.Data.CommandType.StoredProcedure,
                     };
-                    connection.Open();
 
-                    //Шифрование пароля
-                    var md5 = new MD5CryptoServiceProvider();
-                    byte[] checkSum = md5.ComputeHash(Encoding.UTF8.GetBytes((obj as PasswordBox).Password));
-                    var pass = BitConverter.ToString(checkSum).Replace("-", String.Empty);
+                    if (new Regex("@").Matches(User.Email).Count == 1)
+                    {
+                        command.Parameters.AddWithValue("@login", user.Login.ToLower());
+                        command.Parameters.AddWithValue("@email", user.Email.ToLower());
+                        var reader = command.ExecuteReader();
+                        bool con = true;
+                        while (reader.Read())
+                        {
+                            if (User.Login.ToLower() == reader.GetValue(0).ToString())
+                            {
+                                ErrorString = "Пользователь с таким логином уже зарегистрирован...";
+                                OpacityLoginError = 1;
+                                con = false;
+                                break;
+                            }
+                            else
+                            {
+                                if (User.Email.ToLower() == reader.GetValue(1).ToString())
+                                {
+                                    ErrorString = "Пользователь с таким E-mail уже зарегистрирован...";
+                                    OpacityLoginError = 1;
+                                    con = false;
+                                    break;
+                                }
+                            }
+                        }
+                        reader.Close();
 
-                    command.Parameters.AddWithValue("@login", user.Login.ToLower());
-                    command.Parameters.AddWithValue("@password", pass);
-                    command.Parameters.AddWithValue("@email", user.Email.ToLower());
+                        if (con)
+                        {
+                            //Шифрование пароля
+                            var md5 = new MD5CryptoServiceProvider();
+                            byte[] checkSum = md5.ComputeHash(Encoding.UTF8.GetBytes((obj as PasswordBox).Password));
+                            var pass = BitConverter.ToString(checkSum).Replace("-", String.Empty);
 
-                    command.ExecuteNonQuery();
-                    MessageBox.Show("Поздравляем, вы успешно прошли регистрацию, теперь вы можете авторизоваться.", "Регистрация", MessageBoxButton.OK, MessageBoxImage.Information);
+                            command.CommandText = "Registration";
+                            command.Parameters.AddWithValue("@password", pass);
+
+                            command.ExecuteNonQuery();
+                            MessageBox.Show("Поздравляем, вы успешно прошли регистрацию, теперь вы можете авторизоваться.", "Регистрация", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                    }
+                    else
+                    {
+                        ErrorString = "E-mail указан не коректно...";
+                        OpacityLoginError = 1;
+                    }
                 }
-                catch
+                catch (Exception ex)
                 {
                     ErrorString = "Что-то не так, попробуйте позже...";
                     OpacityLoginError = 1;
