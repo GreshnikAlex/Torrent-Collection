@@ -225,6 +225,8 @@ namespace Torrent_Collection.ViewModel
                         SearchPage = searchPage;
                         DownloadPage = downloadPage;
                         SelectedPage = globalPage;
+                        Properties.Settings.Default.Login = User.Login;
+                        Properties.Settings.Default.Save();
                     }
                     else
                     {
@@ -371,6 +373,7 @@ namespace Torrent_Collection.ViewModel
         {
             User.Email = null;
             SearchPage = null;
+            DownloadPage = null;
             SelectedGlobalPage = null;
             SelectedPage = LoginPage;
         });
