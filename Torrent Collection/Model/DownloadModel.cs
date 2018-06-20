@@ -12,6 +12,7 @@ namespace Torrent_Collection.Model
         private int percent; //Проценты
         private int download; //Загружают
         private int upload; //Раздают
+        private string nameFile; //Имя файла
 
         /// <summary>
         /// Имя
@@ -59,6 +60,18 @@ namespace Torrent_Collection.Model
             {
                 upload = value;
                 OnPropertyChanged(nameof(upload));
+            }
+        }
+        /// <summary>
+        /// Имя файла
+        /// </summary>
+        public string NameFile
+        {
+            get => nameFile;
+            set
+            {
+                nameFile = value;
+                OnPropertyChanged(nameof(nameFile));
             }
         }
 

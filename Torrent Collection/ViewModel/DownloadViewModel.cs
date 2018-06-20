@@ -1,6 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using Torrent_Collection.Client;
 using Torrent_Collection.Model;
 
 namespace Torrent_Collection.ViewModel
@@ -13,11 +16,22 @@ namespace Torrent_Collection.ViewModel
         {
             DownloadCollection = new ObservableCollection<DownloadModel>()
             {
-                new DownloadModel() { Name = "Сверхъестественное", Percent=90, Download=34, Upload=54},
-                new DownloadModel() { Name="Assassin's Creed", Percent=30, Download=43, Upload=589 },
-                new DownloadModel() { Name = "Tomb Raider", Percent=100, Download=5, Upload=47 },
-                new DownloadModel() { Name = "Аватар", Percent=0, Download=74, Upload=48 }
+                new DownloadModel() { NameFile="[kinozal.tv]id1604008.torrent" },
+                new DownloadModel() { NameFile="[kinozal.tv]id1621504.torrent" }
             };
+
+            foreach (var D in DownloadCollection)
+            {
+                Task.Factory.StartNew(() =>
+                {
+                    new Engine().Start(@"C:\Users\1995B\Downloads\", @"C:\Users\1995B\Downloads\", D);
+                });
+            }
+        }
+
+        private void Engine()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

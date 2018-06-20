@@ -38,6 +38,9 @@
     <StartupObject>Torrent_Collection.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MonoTorrent">
+      <HintPath>C:\Users\1995B\Downloads\monotorrent-monotorrent-0.90\monotorrent-monotorrent-0.90\src\MonoTorrent\bin\Release\MonoTorrent.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -60,6 +63,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Client\Engine.cs" />
+    <Compile Include="Client\Top10Listener.cs" />
     <Compile Include="Model\DownloadModel.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="RelayCommand.cs" />
