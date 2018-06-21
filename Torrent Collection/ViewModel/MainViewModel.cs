@@ -186,6 +186,8 @@ namespace Torrent_Collection.ViewModel
         /// </summary>
         public RelayCommand Enter_Click => new RelayCommand(obj =>
         {
+            Properties.Settings.Default.Login = "";
+            Properties.Settings.Default.Save();
             EnabledForm = false;
             var searchPage = new View.SearchView();
             var downloadPage = new View.DownloadView();

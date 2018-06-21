@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,7 +24,6 @@ namespace Torrent_Collection.ViewModel
             Task.Factory.StartNew(() =>
             {
                 Search();
-                Thread.Sleep(1000);
             });
         }
 
@@ -81,9 +82,44 @@ namespace Torrent_Collection.ViewModel
                         new Engine().Start($"C:\\Users\\{Environment.UserName}\\Downloads\\TorrentFiles\\", $"C:\\Users\\{Environment.UserName}\\Downloads\\", DownloadCollection[DownloadCollection.Count - 1]);
                     });
                 }
+                Thread.Sleep(500);
             }
             reader.Close();
+            Thread.Sleep(1000);
+            Search();
         }
+
+        public RelayCommand Open_Click => new RelayCommand(obj =>
+        {
+            Process.Start($"C:\\Users\\{Environment.UserName}\\Downloads\\{(obj as DownloadModel).Name}");
+        });
+
+        public RelayCommand Delete_Click => new RelayCommand(obj =>
+        {
+            try
+            {
+                var connection = new SqlConnection()
+                {
+                    ConnectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString
+                };
+
+                var command = new SqlCommand("Delete", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure,
+                };
+                connection.Open();
+
+                command.Parameters.AddWithValue("@login", Properties.Settings.Default.Login.ToLower());
+                command.Parameters.AddWithValue("@nameFile", (obj as DownloadModel).NameFile);
+
+                command.ExecuteNonQuery();
+
+                File.Delete($"C:\\Users\\{Environment.UserName}\\Downloads\\TorrentFiles\\{(obj as DownloadModel).NameFile}");
+                DownloadCollection.Remove(obj as DownloadModel);
+            }
+            catch
+            { return; }
+        });
 
         //INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

@@ -53,6 +53,8 @@
                             <Grid Grid.Column="1">
                                 <Button
                                     Style="{StaticResource ButtonStyle}"
+                                    Command="{Binding DataContext.Delete_Click, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"
+                                    CommandParameter="{Binding}"
                                     ToolTip="Удалить"
                                     Height="40"
                                     Content="x"
@@ -61,6 +63,8 @@
                             <Grid Grid.Column="2">
                                 <Button
                                     Style="{StaticResource ButtonStyle}"
+                                    Command="{Binding DataContext.Open_Click, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"
+                                    CommandParameter="{Binding}"
                                     ToolTip="Открыть"
                                     Height="40"
                                     Content="→"

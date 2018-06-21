@@ -37,9 +37,6 @@
                         Style="{StaticResource ButtonStyle}"
                         Command="{Binding Download_Click}"
                         Content="Загрузки"/>
-                    <Button
-                        Style="{StaticResource ButtonStyle}"
-                        Content="Настройки"/>
                     <Button 
                         Style="{StaticResource ButtonStyle}"
                         Command="{Binding Exit_Click}"

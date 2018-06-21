@@ -43,43 +43,47 @@ namespace Torrent_Collection.Client
             catch
             { _engine.Dispose(); }
 
-            downloadModel.Name = _torrent.Name;
-
-            _manager = new TorrentManager(_torrent, DownloadPath, _torrentDef);
-
-            _engine.Register(_manager);
-            _manager.TorrentStateChanged += delegate (object o, TorrentStateChangedEventArgs e)
+            try
             {
-                lock (listener)
-                    listener.WriteLine("Last status: " + e.OldState.ToString() + " Current status: " + e.NewState.ToString());
-            };
+                downloadModel.Name = _torrent.Name;
 
-            foreach (TrackerTier ttier in _manager.TrackerManager.TrackerTiers)
-            {
-                foreach (Tracker tr in ttier.GetTrackers())
+                _manager = new TorrentManager(_torrent, DownloadPath, _torrentDef);
+
+                _engine.Register(_manager);
+                _manager.TorrentStateChanged += delegate (object o, TorrentStateChangedEventArgs e)
                 {
-                    tr.AnnounceComplete += delegate (object sender, AnnounceResponseEventArgs e)
-                    { listener.WriteLine(string.Format($"{e.Successful}: {e.Tracker}")); };
+                    lock (listener)
+                        listener.WriteLine("Last status: " + e.OldState.ToString() + " Current status: " + e.NewState.ToString());
+                };
+
+                foreach (TrackerTier ttier in _manager.TrackerManager.TrackerTiers)
+                {
+                    foreach (Tracker tr in ttier.GetTrackers())
+                    {
+                        tr.AnnounceComplete += delegate (object sender, AnnounceResponseEventArgs e)
+                        { listener.WriteLine(string.Format($"{e.Successful}: {e.Tracker}")); };
+                    }
+                }
+                _manager.Start();
+                int i = 0;
+                bool _running = true;
+                StringBuilder _stringBuilder = new StringBuilder(1024);
+                while (_running)
+                {
+                    if ((i++) % 10 == 0)
+                    {
+                        if (_manager.State == TorrentState.Stopped)
+                            _running = false;
+
+                        downloadModel.Percent = Convert.ToInt16(_manager.Progress);
+                        downloadModel.Upload = _manager.Peers.Seeds;
+                        downloadModel.Download = _manager.Peers.Leechs;
+                        var Status = _manager.State;
+                    }
                 }
             }
-            _manager.Start();
-            int i = 0;
-            bool _running = true;
-            StringBuilder _stringBuilder = new StringBuilder(1024);
-            while (_running)
-            {
-                if ((i++) % 10 == 0)
-                {
-                    if (_manager.State == TorrentState.Stopped)
-                        _running = false;
-
-                    downloadModel.Percent = Convert.ToInt16(_manager.Progress);
-                    downloadModel.Upload = _manager.Peers.Seeds;
-                    downloadModel.Download = _manager.Peers.Leechs;
-
-                }
-                Thread.Sleep(500);
-            }
+            catch { return; }
+            
         }
     }
 }
