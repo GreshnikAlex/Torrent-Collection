@@ -13,6 +13,7 @@ namespace Torrents
         private string size;
         private int distribute;
         private int download;
+        private string urlFile;
 
         /// <summary>
         /// Метод для ссылки на торрент
@@ -72,6 +73,18 @@ namespace Torrents
             {
                 download = value;
                 OnPropertyChanged("download");
+            }
+        }
+        /// <summary>
+        /// Ссылка на адрес торрент файла
+        /// </summary>
+        public string UrlFile
+        {
+            get => urlFile;
+            set
+            {
+                urlFile = value;
+                OnPropertyChanged(nameof(urlFile));
             }
         }
 

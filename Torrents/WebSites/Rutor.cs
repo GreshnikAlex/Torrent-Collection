@@ -36,6 +36,7 @@ namespace Torrents.WebSites
 
                     try
                     {
+                        torrent.UrlFile = $"{UrlSite}{pageSplit[i]}";
                         i += 12;
                         torrent.UrlTorrent = $"{UrlSite}{pageSplit[i]}";
                         i += 2;

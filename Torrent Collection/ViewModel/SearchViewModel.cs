@@ -1,7 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows;
 using Torrents;
 
 namespace Torrent_Collection.ViewModel
@@ -48,11 +52,17 @@ namespace Torrent_Collection.ViewModel
             });
         });
 
-        /*public RelayCommand Download_Click => new RelayCommand(obj =>
+        public RelayCommand Download_Click => new RelayCommand(obj =>
         {
-            TorrentModel torrentModel = obj as TorrentModel;
-            MessageBox.Show(torrentModel.UrlTorrent);
-        });*/
+            WebClient webClient = new WebClient();
+            string[] name = (obj as TorrentModel).UrlFile.Split('/');
+            webClient.DownloadFile(new Uri((obj as TorrentModel).UrlFile), $"C:\\Users\\{ Environment.UserName}\\Downloads\\TorrentFiles\\{name[name.Length - 1]}.torrent");
+        });
+
+        public RelayCommand FollowLink_Click => new RelayCommand(obj =>
+        {
+            Process.Start((obj as TorrentModel).UrlTorrent);
+        });
 
         //INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
